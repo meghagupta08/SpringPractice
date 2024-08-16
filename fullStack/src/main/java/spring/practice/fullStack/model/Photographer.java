@@ -1,13 +1,22 @@
 package spring.practice.fullStack.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.util.List;
 
+@Entity
 public class Photographer {
-
+        @Id
         private String id;
         private  String name;
+        @OneToMany
         private List<Events> events;
 
+        public Photographer(){
+
+        }
     public Photographer(String id, String name, List<Events> events) {
         this.id = id;
         this.name = name;
