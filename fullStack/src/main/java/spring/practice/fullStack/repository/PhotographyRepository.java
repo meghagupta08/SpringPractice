@@ -8,7 +8,7 @@ import spring.practice.fullStack.model.Photographer;
 import java.util.List;
 
 @Repository
-public interface PhotographyRepository{
+public interface PhotographyRepository extends JpaRepository<Events, String>{
 
     List<Photographer> findAll();
 
