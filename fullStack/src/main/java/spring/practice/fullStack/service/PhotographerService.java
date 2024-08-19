@@ -1,19 +1,15 @@
 package spring.practice.fullStack.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import spring.practice.fullStack.model.Events;
 import spring.practice.fullStack.model.Photographer;
-import spring.practice.fullStack.repository.PhotographyRepository;
 
 import java.util.List;
 
-@Service
-public class PhotographerService {
+public interface PhotographerService {
 
-    @Autowired
-    private PhotographyRepository photographyRepository;
+    List<Photographer> getAllPhotoographer();
+    Photographer savePhotograher(Photographer photgrapher);
 
-    public List<Photographer> getAllPhotographer(){
-        return photographyRepository.findAll();
-    }
+    Photographer savePhotographerByEvents(List<String> eventsIds, Long photographerId);
+
 }

@@ -1,11 +1,9 @@
 package spring.practice.fullStack.restController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.practice.fullStack.model.Events;
-import spring.practice.fullStack.service.EventService;
+import spring.practice.fullStack.service.EventServiceImpl;
 
 import java.util.List;
 
@@ -14,10 +12,16 @@ import java.util.List;
 public class EventController {
 
     @Autowired
-    private EventService eventService;
+    private EventServiceImpl eventService;
 
     @GetMapping
     public List<Events> getAllEvents(){
+
         return eventService.getAllEvents();
+    }
+
+    @PostMapping("/saveEvent/event")
+    public void saveEvents(@RequestBody Events event){
+        eventService.saveEvent(event);
     }
 }

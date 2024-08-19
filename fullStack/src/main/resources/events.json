@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "Wedding",
+    "date": "2024-09-10"
+  },
+  {
+    "id": "2",
+    "name": "Corporate Event",
+    "date": "2024-09-12"
+  },
+  {
+    "id": "3",
+    "name": "Birthday Party",
+    "date": "2024-09-15"
+  },
+  {
+    "id": "4",
+    "name": "Music Concert",
+    "date": "2024-09-18"
+  }
+]

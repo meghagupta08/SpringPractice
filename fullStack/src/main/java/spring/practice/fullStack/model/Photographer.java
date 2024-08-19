@@ -1,24 +1,35 @@
 package spring.practice.fullStack.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "photographer")
 public class Photographer {
 
-        private String id;
-        private  String name;
-        private List<Events> events;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 
-    public Photographer(String id, String name, List<Events> events) {
-        this.id = id;
-        this.name = name;
-        this.events = events;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "photographer_event",
+            joinColumns = @JoinColumn(name = "photographer_Id",referencedColumnName = "id"),
+            inverseJoinColumns =  @JoinColumn(name = "event_id", referencedColumnName = "ID")
+    )
+    private List<Events> events;
+
+    public Photographer(){
+
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
