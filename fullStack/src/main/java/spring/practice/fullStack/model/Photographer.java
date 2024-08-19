@@ -25,6 +25,11 @@ public class Photographer {
 
     }
 
+
+    public Photographer(String name){
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

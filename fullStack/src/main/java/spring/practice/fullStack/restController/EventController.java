@@ -14,7 +14,7 @@ public class EventController {
     @Autowired
     private EventServiceImpl eventService;
 
-    @GetMapping
+    @GetMapping("/getAllEvents")
     public List<Events> getAllEvents(){
 
         return eventService.getAllEvents();
