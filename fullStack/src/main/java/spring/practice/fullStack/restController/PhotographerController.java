@@ -25,8 +25,6 @@ public class PhotographerController {
         return photographerService.savePhotograher(photographer);
     }
 
-
-
     @PostMapping("/{photographerId}/events")
     public Photographer saveEventsForPhotographer(@PathVariable Long photographerId, @RequestBody List<String> eventIds) {
         return photographerService.savePhotographerByEvents(eventIds,photographerId);

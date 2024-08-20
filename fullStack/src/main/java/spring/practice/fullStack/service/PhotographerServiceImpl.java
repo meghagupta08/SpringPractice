@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.practice.fullStack.dao.EventRepository;
 import spring.practice.fullStack.dao.PhotographerRepository;
+import spring.practice.fullStack.exception.PhotographerNotFoundException;
 import spring.practice.fullStack.model.Events;
 import spring.practice.fullStack.model.Photographer;
 
@@ -26,12 +27,19 @@ public class PhotographerServiceImpl implements PhotographerService{
 
     @Override
     public Photographer savePhotograher(Photographer photgrapher) {
+        try{
+            return photographerRepository.save(photgrapher);
+        }
+        catch(PhotographerNotFoundException ex){
+            throw new PhotographerNotFoundException("Not found");
+        }
 
-        return photographerRepository.save(photgrapher);
     }
 
     @Override
     public Photographer savePhotographerByEvents(List<String> eventsIds, Long id) {
+
+
         Optional<Photographer> photographer = photographerRepository.findById(id);
        if(photographer.isPresent()){
            Photographer currPhotographer = photographer.get();
@@ -39,7 +47,7 @@ public class PhotographerServiceImpl implements PhotographerService{
            currPhotographer.setEvents(currEvents);
            return photographerRepository.save(currPhotographer);
        }else{
-           throw new RuntimeException("Photographer not found");
+           throw new PhotographerNotFoundException("Photographer with id " + id + " not found");
        }
     }
 }

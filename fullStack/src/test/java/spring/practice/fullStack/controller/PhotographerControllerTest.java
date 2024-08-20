@@ -7,10 +7,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 //import spring.practice.fullStack.model.Event;
+import spring.practice.fullStack.exception.PhotographerNotFoundException;
 import spring.practice.fullStack.model.Photographer;
 import spring.practice.fullStack.restController.PhotographerController;
 import spring.practice.fullStack.service.PhotographerService;
@@ -49,8 +52,6 @@ private PhotographerServiceImpl photographerServiceImpl;
      mockMvc = MockMvcBuilders.standaloneSetup(photographerController).build();
  }
 
-
-
     @Test
     void testGetAllPhotographers() throws Exception {
         Photographer photographer1 = new Photographer();
@@ -76,6 +77,22 @@ private PhotographerServiceImpl photographerServiceImpl;
 
         verify(photographerServiceImpl, times(1)).getAllPhotoographer();
     }
+
+    @Test
+    void testPhotographerNotFoundException() throws Exception{
+        List<String> eventsIds = List.of("1","2");
+        when(photographerServiceImpl.savePhotographerByEvents(eventsIds,1L)).thenThrow(new PhotographerNotFoundException("Photographer not found"));
+        mockMvc.perform(post("/api/photography/events")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("[1, 2]"))  // Assuming the content is a list of event IDs
+                .andExpect(status().isNotFound());
+               // .andExpect(jsonPath("$.message").value("Photographer not found"));
+
+
+    }
+
+
+
 
 
 }

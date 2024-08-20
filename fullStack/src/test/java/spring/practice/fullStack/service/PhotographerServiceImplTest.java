@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import spring.practice.fullStack.dao.EventRepository;
 import spring.practice.fullStack.dao.PhotographerRepository;
+import spring.practice.fullStack.exception.PhotographerNotFoundException;
 import spring.practice.fullStack.model.Events;
 import spring.practice.fullStack.model.Photographer;
 
@@ -110,6 +111,8 @@ public class PhotographerServiceImplTest {
 
 
     }
+
+
 
 
 
